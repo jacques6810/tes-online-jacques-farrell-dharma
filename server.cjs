@@ -37,8 +37,7 @@ app.post("/data", (req, res) => {
       console.error("Error inserting data:", error); // Log the error
       res.status(500).send(error);
     } else {
-      console.log("Data inserted successfully:", results); // Log the success
-      res.json(results);
+      res.status(201).send(results);
     }
   });
 });
@@ -47,7 +46,7 @@ app.post("/data", (req, res) => {
 app.put("/data/:id", (req, res) => {
   const { id } = req.params;
   const data = req.body;
-
+  console.log("Updating data for ID:", id, data); // Log the update data
   pool.query(
     "UPDATE transaction SET ? WHERE id = ?",
     [data, id],
@@ -56,13 +55,13 @@ app.put("/data/:id", (req, res) => {
         console.error("Error updating data:", error); // Log the error
         res.status(500).send(error);
       } else {
-        console.log("Data updated successfully:", results); // Log the success
-        res.json(results);
+        res.status(200).send(results);
       }
     }
   );
 });
 
+// Start the server
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+  console.log(`Server is running on http://localhost:${port}`);
 });

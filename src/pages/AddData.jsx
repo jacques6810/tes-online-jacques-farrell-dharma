@@ -1,5 +1,5 @@
-import { useState } from "react";
-import "../App.css";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function AddData() {
   const [formData, setFormData] = useState({
@@ -7,18 +7,14 @@ function AddData() {
     productName: "",
     amount: "",
     customerName: "",
-    status: "",
+    status: "0",
     transactionDate: "",
-    createBy: "",
-    createOn: "",
   });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = (e) => {
@@ -32,20 +28,16 @@ function AddData() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Success:", data);
-        // Optionally, reset the form or show a success message
+        console.log("Data added successfully:", data);
+        navigate("/table");
       })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+      .catch((error) => console.error("Error adding data:", error));
   };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="container mx-auto my-10 p-8 bg-white shadow-md rounded">
-        <h1 className="flex items-center justify-center text-3xl font-bold mt-4 mb-10">
-          Add Data
-        </h1>
+      <div className="container mx-auto my-10 p-4 bg-white shadow-md rounded">
+        <h1 className="text-4xl font-bold mb-4">Add Data</h1>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <input
@@ -88,14 +80,15 @@ function AddData() {
             />
           </div>
           <div className="mb-4">
-            <input
-              type="number"
+            <select
               name="status"
-              placeholder="Status"
               value={formData.status}
               onChange={handleChange}
               className="w-full p-2 border border-gray-300 rounded"
-            />
+            >
+              <option value="0">SUCCESS</option>
+              <option value="1">FAILED</option>
+            </select>
           </div>
           <div className="mb-4">
             <input
@@ -106,28 +99,9 @@ function AddData() {
               className="w-full p-2 border border-gray-300 rounded"
             />
           </div>
-          <div className="mb-4">
-            <input
-              type="text"
-              name="createBy"
-              placeholder="Created By"
-              value={formData.createBy}
-              onChange={handleChange}
-              className="w-full p-2 border border-gray-300 rounded"
-            />
-          </div>
-          <div className="mb-4">
-            <input
-              type="datetime-local"
-              name="createOn"
-              value={formData.createOn}
-              onChange={handleChange}
-              className="w-full p-2 border border-gray-300 rounded"
-            />
-          </div>
           <button
             type="submit"
-            className="w-full p-2 bg-blue-500 text-white rounded"
+            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
           >
             Add Data
           </button>
