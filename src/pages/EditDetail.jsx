@@ -18,6 +18,7 @@ function EditDetail() {
     customerName: item.customerName,
     status: item.status,
     transactionDate: item.transactionDate,
+    createBy: item.createBy,
   });
 
   const handleChange = (e) => {
@@ -42,8 +43,8 @@ function EditDetail() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="container mx-auto my-10 p-4 bg-white shadow-md rounded">
+    <div className="container mx-auto px-4">
+      <div className="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg">
         <h1 className="flex items-center justify-center text-2xl font-bold mb-4">
           Edit Detail
         </h1>
@@ -138,13 +139,30 @@ function EditDetail() {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
-          <button
-            type="button"
-            onClick={handleSave}
-            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
-          >
-            Save
-          </button>
+          <div className="mb-4">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="createBy"
+            >
+              Create By
+            </label>
+            <input
+              type="text"
+              name="createBy"
+              value={formData.createBy}
+              onChange={handleChange}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            />
+          </div>
+          <div className="flex justify-center">
+            <button
+              type="button"
+              onClick={handleSave}
+              className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+            >
+              Save
+            </button>
+          </div>
         </form>
       </div>
     </div>

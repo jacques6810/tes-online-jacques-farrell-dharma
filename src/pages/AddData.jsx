@@ -9,6 +9,7 @@ function AddData() {
     customerName: "",
     status: "0",
     transactionDate: "",
+    createBy: "",
   });
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
@@ -27,18 +28,24 @@ function AddData() {
       !formData.productName ||
       !formData.amount ||
       !formData.customerName ||
-      !formData.transactionDate
+      !formData.transactionDate ||
+      !formData.createBy
     ) {
       setError("All fields are required.");
       return;
     }
+
+    const dataToSubmit = {
+      ...formData,
+      createOn: new Date().toISOString(),
+    };
 
     fetch("http://localhost:3000/data", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify(dataToSubmit),
     })
       .then((response) => response.json())
       .then((data) => {
@@ -53,9 +60,11 @@ function AddData() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="container mx-auto my-10 p-4 bg-white shadow-md rounded">
-        <h1 className="text-4xl font-bold mb-4">Add Data</h1>
+    <div className="container mx-auto px-4">
+      <div className="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg">
+        <h1 className="flex items-center justify-center text-2xl font-bold mb-4">
+          Add Data
+        </h1>
         {error && <p className="text-red-500">{error}</p>}
         {success && <p className="text-green-500">Data added successfully!</p>}
         <form onSubmit={handleSubmit}>
@@ -115,6 +124,16 @@ function AddData() {
               type="datetime-local"
               name="transactionDate"
               value={formData.transactionDate}
+              onChange={handleChange}
+              className="w-full p-2 border border-gray-300 rounded"
+            />
+          </div>
+          <div className="mb-4">
+            <input
+              type="text"
+              name="createBy"
+              placeholder="Created By"
+              value={formData.createBy}
               onChange={handleChange}
               className="w-full p-2 border border-gray-300 rounded"
             />

@@ -65,6 +65,12 @@ function Table() {
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Transaction Date
                   </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Created By
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Created On
+                  </th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
@@ -88,6 +94,12 @@ function Table() {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       {new Date(item.transactionDate).toLocaleString()}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      {item.createBy}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      {new Date(item.createOn).toLocaleString()}
                     </td>
                   </tr>
                 ))}

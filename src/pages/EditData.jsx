@@ -26,12 +26,9 @@ function EditData() {
             Edit Data
           </h1>
         </div>
-        <table className="min-w-full divide-y divide-gray-200">
+        <table className="min-w-full divide-y divide-gray-200 table-auto">
           <thead className="bg-gray-50">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                ID
-              </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Product ID
               </th>
@@ -51,34 +48,47 @@ function EditData() {
                 Transaction Date
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Action
+                Created By
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Created On
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Actions
               </th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {data.map((item) => (
               <tr key={item.id}>
-                <td className="px-6 py-4 whitespace-nowrap">{item.id}</td>
-                <td className="px-6 py-4 whitespace-nowrap">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   {item.productID}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   {item.productName}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap">{item.amount}</td>
-                <td className="px-6 py-4 whitespace-nowrap">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  {item.amount}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   {item.customerName}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   {item.status === 0 ? "SUCCESS" : "FAILED"}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   {new Date(item.transactionDate).toLocaleString()}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  {item.createBy}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  {new Date(item.createOn).toLocaleString()}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   <button
                     onClick={() => handleEdit(item)}
-                    className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-700"
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                   >
                     Edit
                   </button>
