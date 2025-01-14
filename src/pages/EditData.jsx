@@ -15,6 +15,7 @@ function EditData() {
 
   const handleEdit = (item) => {
     navigate("/edit-detail", { state: { item } });
+    console.log("Item to edit:", item);
   };
 
   return (
