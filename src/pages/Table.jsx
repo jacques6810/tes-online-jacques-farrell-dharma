@@ -33,8 +33,7 @@ function Table() {
       <div className="container mx-auto my-10 p-4 bg-white shadow-md rounded">
         <div className="flex items-center justify-center">
           <h1 className="flex items-center justify-center text-4xl font-bold mt-4 mb-10">
-            {" "}
-            Transaction Data{" "}
+            Transaction Data
           </h1>
         </div>
         {Object.keys(groupedData).map((key) => (

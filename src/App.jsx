@@ -1,6 +1,7 @@
-import { useState } from "react";
-import "./App.css";
+import React, { useState } from "react";
 import Table from "./pages/Table.jsx";
+import AddData from "./pages/AddData.jsx";
+import EditData from "./pages/EditData.jsx";
 
 function App() {
   const [view, setView] = useState("home");
@@ -20,19 +21,27 @@ function App() {
             >
               View Tables
             </button>
-            <button className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-700">
+            <button
+              className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-700"
+              onClick={() => setView("addData")}
+            >
               Add Data
             </button>
-            <button className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700">
+            <button
+              className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700"
+              onClick={() => setView("editData")}
+            >
               Edit Data
             </button>
-            <button className="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-700">
+            <button className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700">
               View Detail Data
             </button>
           </div>
         </div>
       )}
       {view === "table" && <Table />}
+      {view === "addData" && <AddData />}
+      {view === "editData" && <EditData />}
     </div>
   );
 }
