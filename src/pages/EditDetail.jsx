@@ -44,7 +44,9 @@ function EditDetail() {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="container mx-auto my-10 p-4 bg-white shadow-md rounded">
-        <h1 className="text-4xl font-bold mb-4">Edit Detail</h1>
+        <h1 className="flex items-center justify-center text-2xl font-bold mb-4">
+          Edit Detail
+        </h1>
         <form>
           <div className="mb-4">
             <label

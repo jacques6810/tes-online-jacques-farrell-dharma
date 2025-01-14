@@ -10,6 +10,8 @@ function AddData() {
     status: "0",
     transactionDate: "",
   });
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -19,6 +21,18 @@ function AddData() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Validate form data
+    if (
+      !formData.productID ||
+      !formData.productName ||
+      !formData.amount ||
+      !formData.customerName ||
+      !formData.transactionDate
+    ) {
+      setError("All fields are required.");
+      return;
+    }
+
     fetch("http://localhost:3000/data", {
       method: "POST",
       headers: {
@@ -29,7 +43,11 @@ function AddData() {
       .then((response) => response.json())
       .then((data) => {
         console.log("Data added successfully:", data);
-        navigate("/table");
+        setSuccess(true);
+        setTimeout(() => {
+          setSuccess(false);
+          navigate("/table");
+        }, 2000);
       })
       .catch((error) => console.error("Error adding data:", error));
   };
@@ -38,6 +56,8 @@ function AddData() {
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="container mx-auto my-10 p-4 bg-white shadow-md rounded">
         <h1 className="text-4xl font-bold mb-4">Add Data</h1>
+        {error && <p className="text-red-500">{error}</p>}
+        {success && <p className="text-green-500">Data added successfully!</p>}
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <input
